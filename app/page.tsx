@@ -292,20 +292,9 @@ export default function Home() {
         />
 
         {/* Search, Filter & Controls Toolbar */}
-        <div
-          className="card"
-          style={{
-            padding: "14px 18px",
-            marginBottom: 16,
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 12,
-            alignItems: "center",
-            justifyContent: "space-between"
-          }}
-        >
+        <div className="card toolbar-card">
           {/* Search bar */}
-          <div style={{ flex: 1, minWidth: 260 }}>
+          <div className="toolbar-search">
             <input
               className="form-input"
               value={search}
@@ -315,11 +304,10 @@ export default function Home() {
           </div>
 
           {/* Filter Dropdowns */}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, alignItems: "center" }}>
+          <div className="toolbar-filters">
             {/* Category */}
             <select
-              className="form-select"
-              style={{ width: "auto" }}
+              className="form-select toolbar-select"
               value={categoryFilter}
               onChange={e => setCategoryFilter(e.target.value)}
             >
@@ -332,8 +320,7 @@ export default function Home() {
 
             {/* Priority */}
             <select
-              className="form-select"
-              style={{ width: "auto" }}
+              className="form-select toolbar-select"
               value={priorityFilter}
               onChange={e => setPriorityFilter(e.target.value)}
             >
@@ -345,12 +332,11 @@ export default function Home() {
 
             {/* Buying Signal */}
             <select
-              className="form-select"
-              style={{ width: "auto" }}
+              className="form-select toolbar-select"
               value={buyingSignalFilter}
               onChange={e => setBuyingSignalFilter(e.target.value)}
             >
-              <option value="ALL">All Buying Signals</option>
+              <option value="ALL">All Signals</option>
               <option value="Strong">Strong Signal</option>
               <option value="Moderate">Moderate Signal</option>
               <option value="Weak">Weak Signal</option>
@@ -358,16 +344,15 @@ export default function Home() {
 
             {/* Sort */}
             <select
-              className="form-select"
-              style={{ width: "auto" }}
+              className="form-select toolbar-select"
               value={sortBy}
               onChange={e => setSortBy(e.target.value as any)}
             >
-              <option value="score">Sort: Commercial Score</option>
-              <option value="recent">Sort: Recently Added</option>
-              <option value="reviews">Sort: Review Count</option>
-              <option value="rating">Sort: Google Rating</option>
-              <option value="followup">Sort: Follow-up Date</option>
+              <option value="score">Sort: Score</option>
+              <option value="recent">Sort: Recent</option>
+              <option value="reviews">Sort: Reviews</option>
+              <option value="rating">Sort: Rating</option>
+              <option value="followup">Sort: Follow-up</option>
             </select>
 
             {/* Clear Filters if active */}
@@ -378,7 +363,7 @@ export default function Home() {
               followUpFilter ||
               search) && (
               <button
-                className="btn btn-sm btn-ghost"
+                className="btn btn-sm btn-ghost btn-reset"
                 onClick={() => {
                   setCategoryFilter("ALL");
                   setPriorityFilter("ALL");

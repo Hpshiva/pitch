@@ -93,11 +93,11 @@ export default function ImportExportModal({
               Download your full leads dataset for spreadsheets or complete offline backups.
             </div>
 
-            <div style={{ display: "flex", gap: 10 }}>
-              <button className="btn btn-secondary" onClick={handleExportCsv}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+              <button className="btn btn-secondary" onClick={handleExportCsv} style={{ flex: 1, minWidth: 160 }}>
                 📊 Export CSV (Spreadsheets)
               </button>
-              <button className="btn btn-outline" onClick={handleExportJson}>
+              <button className="btn btn-outline" onClick={handleExportJson} style={{ flex: 1, minWidth: 160 }}>
                 💾 Backup Full Database (JSON)
               </button>
             </div>

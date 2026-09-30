@@ -105,7 +105,7 @@ export default function DiscoveryModal({
             <strong>Note on Discovery:</strong> For primary targeting, manually search Google Maps for top-rated clinics/cafes and paste the links into the engine. This optional tool queries free OpenStreetMap data without paid Google Places keys.
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr auto", gap: 10, alignItems: "flex-end" }}>
+          <div className="discovery-search-grid">
             <div className="form-group">
               <label className="form-label">City</label>
               <input
@@ -166,7 +166,9 @@ export default function DiscoveryModal({
                       padding: "10px 14px",
                       display: "flex",
                       justifyContent: "space-between",
-                      alignItems: "center"
+                      alignItems: "center",
+                      flexWrap: "wrap",
+                      gap: 8
                     }}
                   >
                     <div>

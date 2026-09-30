@@ -96,7 +96,7 @@ export default function SettingsModal({
 
         <div className="modal-body" style={{ display: "flex", flexDirection: "column", gap: 14 }}>
           {/* User Profile */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+          <div className="form-grid-2">
             <div className="form-group">
               <label className="form-label">Your Name</label>
               <input
@@ -118,7 +118,7 @@ export default function SettingsModal({
           </div>
 
           {/* Agency & Portfolio */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+          <div className="form-grid-2">
             <div className="form-group">
               <label className="form-label">Agency / Brand Name</label>
               <input
@@ -140,7 +140,7 @@ export default function SettingsModal({
           </div>
 
           {/* Contact Details */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+          <div className="form-grid-2">
             <div className="form-group">
               <label className="form-label">Your Email</label>
               <input
@@ -163,7 +163,7 @@ export default function SettingsModal({
           </div>
 
           {/* Defaults */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+          <div className="form-grid-3">
             <div className="form-group">
               <label className="form-label">Default City</label>
               <input
@@ -214,7 +214,7 @@ export default function SettingsModal({
               If Ollama is not installed or running, the tool seamlessly uses its high-converting built-in free template engine. Zero paid API keys required.
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 12 }}>
+            <div className="form-grid-split">
               <div className="form-group">
                 <label className="form-label">Ollama URL</label>
                 <input
@@ -235,7 +235,7 @@ export default function SettingsModal({
               </div>
             </div>
 
-            <div style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 10 }}>
+            <div style={{ marginTop: 12, display: "flex", alignItems: "center", flexWrap: "wrap", gap: 10 }}>
               <button
                 type="button"
                 className="btn btn-secondary btn-sm"

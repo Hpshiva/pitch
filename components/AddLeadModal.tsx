@@ -457,7 +457,7 @@ export default function AddLeadModal({
                     </span>
                   </div>
 
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 10, fontSize: 13 }}>
+                  <div className="form-grid-2" style={{ gap: 10, fontSize: 13 }}>
                     <div>
                       <span style={{ color: "var(--text-muted)" }}>Location:</span>{" "}
                       <strong>{[autoFetchedLead.area, autoFetchedLead.city, autoFetchedLead.country].filter(Boolean).join(", ") || "Dubai"}</strong>
@@ -487,7 +487,7 @@ export default function AddLeadModal({
                     </div>
                   </div>
 
-                  <div style={{ marginTop: 16, paddingTop: 14, borderTop: "1px solid #f1f5f9", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <div className="autofetch-card-footer" style={{ marginTop: 16, paddingTop: 14, borderTop: "1px solid #f1f5f9", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 10 }}>
                     <button
                       type="button"
                       className="btn btn-outline btn-sm"
@@ -559,7 +559,7 @@ export default function AddLeadModal({
                   <div style={{ fontWeight: 700, marginBottom: 8, color: "var(--text-main)" }}>
                     Extracted Preview (Review & Confirm):
                   </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 8 }}>
+                  <div className="form-grid-2" style={{ gap: 8 }}>
                     <div><strong>Name:</strong> {extractedData.businessName || "Not found"}</div>
                     <div><strong>Category:</strong> {extractedData.category || "Not found"}</div>
                     <div><strong>Rating:</strong> {extractedData.rating ? `${extractedData.rating}★` : "Not found"}</div>
@@ -580,7 +580,7 @@ export default function AddLeadModal({
           {tab === "form" && (
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               {/* Row 1: Name & Category */}
-              <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 12 }}>
+              <div className="form-grid-split">
                 <div className="form-group">
                   <label className="form-label">Business Name *</label>
                   <input
@@ -609,7 +609,7 @@ export default function AddLeadModal({
               </div>
 
               {/* Row 2: Location */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+              <div className="form-grid-3">
                 <div className="form-group">
                   <label className="form-label">City</label>
                   <input
@@ -644,9 +644,10 @@ export default function AddLeadModal({
               {/* Google Maps URL + 1-click Resolve */}
               <div className="form-group">
                 <label className="form-label">Google Maps URL</label>
-                <div style={{ display: "flex", gap: 8 }}>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   <input
                     className="form-input"
+                    style={{ flex: 1, minWidth: 200 }}
                     value={mapsUrl}
                     onChange={e => setMapsUrl(e.target.value)}
                     placeholder="https://maps.app.goo.gl/... or full maps URL"
@@ -663,7 +664,7 @@ export default function AddLeadModal({
               </div>
 
               {/* Rating, Reviews, Branches */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+              <div className="form-grid-3">
                 <div className="form-group">
                   <label className="form-label">Google Rating (0-5)</label>
                   <input
@@ -704,7 +705,7 @@ export default function AddLeadModal({
               </div>
 
               {/* Contact Channels: Phone, WhatsApp, Email */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+              <div className="form-grid-3">
                 <div className="form-group">
                   <label className="form-label">Phone Number</label>
                   <input
@@ -738,7 +739,7 @@ export default function AddLeadModal({
               </div>
 
               {/* Website & Socials */}
-              <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gap: 12 }}>
+              <div className="form-grid-3">
                 <div className="form-group">
                   <label className="form-label">Website (Leave blank if none)</label>
                   <input

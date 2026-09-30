@@ -28,12 +28,12 @@ export default function Navbar({
           <div className="nav-brand">
             <div className="brand-icon">⚡</div>
             <div>
-              <div className="brand-title">Local Business Lead Engine</div>
-              <div className="brand-subtitle">₹0-First Client Acquisition & Outreach</div>
+              <div className="brand-title">Lead Engine</div>
+              <div className="brand-subtitle desktop-only">₹0-First Client Acquisition & Outreach</div>
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div className="nav-actions" style={{ display: "flex", alignItems: "center", gap: 8 }}>
             {/* AI Status Pill */}
             <div
               className={`status-pill ${aiMode.online ? "active" : ""}`}
@@ -42,7 +42,7 @@ export default function Navbar({
                   ? `Connected to local Ollama (${aiMode.activeModel})`
                   : "Ollama not detected. Using built-in free template engine (100% offline & ₹0)"
               }
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", fontSize: 11, padding: "3px 8px" }}
               onClick={onOpenSettings}
             >
               <div
@@ -51,8 +51,8 @@ export default function Navbar({
               />
               <span>
                 {aiMode.online
-                  ? `AI: Ollama (${aiMode.activeModel || "local"})`
-                  : "AI: Free Template Engine"}
+                  ? `Ollama (${aiMode.activeModel || "local"})`
+                  : "Free Template Engine"}
               </span>
             </div>
 
@@ -61,33 +61,33 @@ export default function Navbar({
               className="btn btn-outline btn-sm"
               onClick={onOpenDiscovery}
               title="Optional free discovery via OpenStreetMap (No API key needed)"
-              style={{ color: "#cbd5e1", borderColor: "#334155" }}
+              style={{ color: "#cbd5e1", borderColor: "#334155", padding: "4px 8px" }}
             >
-              <span>🌍 Free Discovery</span>
+              <span>🌍 <span className="desktop-only">Discovery</span></span>
             </button>
 
             <button
               className="btn btn-outline btn-sm"
               onClick={onOpenImportExport}
               title="Import or Export CSV & JSON backups"
-              style={{ color: "#cbd5e1", borderColor: "#334155" }}
+              style={{ color: "#cbd5e1", borderColor: "#334155", padding: "4px 8px" }}
             >
-              <span>📁 Import / Export</span>
+              <span>📁 <span className="desktop-only">Backup</span></span>
             </button>
 
             <button
               className="btn btn-outline btn-sm"
               onClick={onOpenSettings}
               title="Agency branding and AI settings"
-              style={{ color: "#cbd5e1", borderColor: "#334155" }}
+              style={{ color: "#cbd5e1", borderColor: "#334155", padding: "4px 8px" }}
             >
-              <span>⚙️ Settings</span>
+              <span>⚙️</span>
             </button>
 
             <button
               className="btn btn-accent btn-sm"
               onClick={onOpenAddModal}
-              style={{ fontWeight: 700 }}
+              style={{ fontWeight: 700, padding: "6px 12px" }}
             >
               <span>+ Add Lead</span>
             </button>

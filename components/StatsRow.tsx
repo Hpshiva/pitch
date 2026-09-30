@@ -44,6 +44,7 @@ export default function StatsRow({
       {/* Urgent Follow-up Alert Banner if overdue or due today */}
       {(dueToday > 0 || overdue > 0) && (
         <div
+          className="followup-alert-banner"
           style={{
             background: overdue > 0 ? "#fef2f2" : "#fffbeb",
             border: `1px solid ${overdue > 0 ? "#fecaca" : "#fde68a"}`,
@@ -52,7 +53,8 @@ export default function StatsRow({
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            gap: 12
+            flexWrap: "wrap",
+            gap: 10
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600 }}>
@@ -64,7 +66,7 @@ export default function StatsRow({
             </span>
           </div>
 
-          <div style={{ display: "flex", gap: 8 }}>
+          <div className="followup-alert-actions" style={{ display: "flex", gap: 8 }}>
             <button
               className="btn btn-sm btn-outline"
               style={{

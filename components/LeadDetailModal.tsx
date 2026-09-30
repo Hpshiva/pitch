@@ -279,7 +279,7 @@ export default function LeadDetailModal({
         <div className="modal-header">
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
                 <span style={{ fontSize: 18, fontWeight: 800 }}>{lead.businessName}</span>
                 <span
                   style={{
@@ -451,7 +451,7 @@ export default function LeadDetailModal({
               </div>
 
               {/* Pipeline Status & CRM Fields */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+              <div className="form-grid-3">
                 <div className="form-group">
                   <label className="form-label">CRM Pipeline Status</label>
                   <select
@@ -489,7 +489,7 @@ export default function LeadDetailModal({
               </div>
 
               {/* Services & Buying Signals */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+              <div className="form-grid-2">
                 <div
                   style={{
                     background: "white",
@@ -658,7 +658,7 @@ export default function LeadDetailModal({
                     <div style={{ fontWeight: 700, fontSize: 13, marginBottom: 12 }}>
                       Automated Signals Breakdown
                     </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 10, fontSize: 13 }}>
+                    <div className="form-grid-3" style={{ fontSize: 13, gap: 10 }}>
                       <div>{analysis.reachable ? "✅" : "❌"} Website loads</div>
                       <div>{analysis.https ? "✅" : "❌"} HTTPS secure</div>
                       <div>{analysis.mobileMeta ? "✅" : "❌"} Mobile viewport</div>
@@ -678,7 +678,7 @@ export default function LeadDetailModal({
                   </div>
 
                   {/* Detected Strengths, Gaps, Opportunities */}
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                  <div className="form-grid-2">
                     <div
                       style={{
                         background: "#f0fdf4",
@@ -756,10 +756,12 @@ export default function LeadDetailModal({
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
+                      flexWrap: "wrap",
+                      gap: 12,
                       background: "#f8fafc",
                       border: "1px solid var(--border-light)",
                       borderRadius: "var(--radius-lg)",
-                      padding: 18
+                      padding: 16
                     }}
                   >
                     <div>
@@ -771,7 +773,7 @@ export default function LeadDetailModal({
                       </div>
                     </div>
 
-                    <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                    <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
                       <span className={`badge badge-priority-${score.priority}`} style={{ fontSize: 14, padding: "6px 12px" }}>
                         Priority {score.priority} ({score.priorityLabel})
                       </span>
@@ -852,7 +854,7 @@ export default function LeadDetailModal({
                   gap: 12
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
                   <div>
                     <label style={{ fontSize: 11, fontWeight: 700, color: "var(--text-muted)", display: "block" }}>
                       PITCH TONE
@@ -940,7 +942,7 @@ export default function LeadDetailModal({
                       padding: 16
                     }}
                   >
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 6, marginBottom: 8 }}>
                       <span style={{ fontWeight: 800, color: "#166534" }}>💬 WhatsApp Message (Quick Forwardable)</span>
                       <div style={{ display: "flex", gap: 6 }}>
                         {lead.whatsapp && (
@@ -973,7 +975,7 @@ export default function LeadDetailModal({
                       padding: 16
                     }}
                   >
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 6, marginBottom: 8 }}>
                       <div>
                         <span style={{ fontWeight: 800, color: "var(--text-main)" }}>✉️ Email Pitch</span>
                         <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 2 }}>
@@ -1001,7 +1003,7 @@ export default function LeadDetailModal({
                   </div>
 
                   {/* Follow-ups Cards */}
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                  <div className="form-grid-2">
                     <div
                       style={{
                         background: "white",
@@ -1141,7 +1143,7 @@ export default function LeadDetailModal({
                   Custom Website Concept / Demo Management
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 12, marginBottom: 14 }}>
+                <div className="form-grid-split" style={{ marginBottom: 14 }}>
                   <div className="form-group">
                     <label className="form-label">Demo URL</label>
                     <input
@@ -1179,7 +1181,7 @@ export default function LeadDetailModal({
                     <div style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)", marginBottom: 8 }}>
                       SUGGESTED DEMO SECTIONS FOR {lead.category.toUpperCase()}:
                     </div>
-                    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 6, fontSize: 12 }}>
+                    <div className="form-grid-2" style={{ gap: 6, fontSize: 12 }}>
                       {pitch.suggestedDemoSections.map((sec, idx) => (
                         <div key={sec} style={{ background: "#f8fafc", padding: "6px 10px", borderRadius: "var(--radius-sm)" }}>
                           {idx + 1}. {sec}
