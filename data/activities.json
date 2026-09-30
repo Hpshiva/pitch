@@ -1,0 +1,66 @@
+[
+  {
+    "id": "14bed6a7-d328-4a83-97ab-c8d9a34463d1",
+    "leadId": "a14ad3a4-8543-48a1-bfc3-ffc51fe0c898",
+    "type": "ANALYZED",
+    "title": "Website analyzed. Score: 0/100",
+    "timestamp": "2026-09-30T05:54:47.336Z"
+  },
+  {
+    "id": "ba632ff5-00d8-452a-8df9-ea782f3bf1b3",
+    "leadId": "a14ad3a4-8543-48a1-bfc3-ffc51fe0c898",
+    "type": "PITCH_GENERATED",
+    "title": "Personalized pitch generated using Built-in Free Template Engine",
+    "timestamp": "2026-09-30T05:53:27.040Z"
+  },
+  {
+    "id": "1ea63fb9-34cf-4687-9ee0-5b798bbd64c8",
+    "leadId": "a14ad3a4-8543-48a1-bfc3-ffc51fe0c898",
+    "type": "DEMO_UPDATED",
+    "title": "Demo status set to NOT_STARTED",
+    "timestamp": "2026-09-30T05:53:20.618Z"
+  },
+  {
+    "id": "98de214d-74ee-4ece-8d4f-9cb6b32bba9a",
+    "leadId": "a4fc5809-0c60-4bcf-8c0e-2249b8f8601d",
+    "type": "ANALYZED",
+    "title": "Website analyzed. Score: 0/100",
+    "timestamp": "2026-09-30T05:51:02.489Z"
+  },
+  {
+    "id": "a611efb7-0d36-4cda-806e-023b3c304c58",
+    "leadId": "a14ad3a4-8543-48a1-bfc3-ffc51fe0c898",
+    "type": "LEAD_CREATED",
+    "title": "Imported Artisan Roast Cafe via CSV",
+    "timestamp": "2026-09-29T19:25:26.488Z"
+  },
+  {
+    "id": "78803d93-5302-41d5-9fd0-47e371445505",
+    "leadId": "a4fc5809-0c60-4bcf-8c0e-2249b8f8601d",
+    "type": "FOLLOW_UP_SCHEDULED",
+    "title": "Follow-up scheduled for 2026-10-03",
+    "timestamp": "2026-09-29T19:25:11.053Z"
+  },
+  {
+    "id": "ffaf6f4d-d555-4734-8731-260dfec3b6e0",
+    "leadId": "a4fc5809-0c60-4bcf-8c0e-2249b8f8601d",
+    "type": "CONTACTED",
+    "title": "Outreach sent via WhatsApp/Email",
+    "timestamp": "2026-09-29T19:25:11.053Z"
+  },
+  {
+    "id": "5bfd0431-8fb9-4558-896e-659e7f6a5426",
+    "leadId": "a4fc5809-0c60-4bcf-8c0e-2249b8f8601d",
+    "type": "STATUS_CHANGED",
+    "title": "Status updated from NEW to CONTACTED",
+    "details": "Note: Sent WhatsApp outreach offering free concept demo.",
+    "timestamp": "2026-09-29T19:25:11.053Z"
+  },
+  {
+    "id": "114ac623-9214-46be-88fb-a98203015212",
+    "leadId": "a4fc5809-0c60-4bcf-8c0e-2249b8f8601d",
+    "type": "LEAD_CREATED",
+    "title": "Added Pearl Dental Clinic Dubai (Dental Clinic) to lead pipeline",
+    "timestamp": "2026-09-29T19:25:06.644Z"
+  }
+]

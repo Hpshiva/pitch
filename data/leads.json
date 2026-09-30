@@ -1,0 +1,266 @@
+[
+  {
+    "id": "a14ad3a4-8543-48a1-bfc3-ffc51fe0c898",
+    "createdAt": "2026-09-29T19:25:26.487Z",
+    "updatedAt": "2026-09-30T05:54:47.336Z",
+    "businessName": "Artisan Roast Cafe",
+    "category": "Cafe",
+    "country": "",
+    "city": "Dubai",
+    "area": "Al Quoz",
+    "mapsUrl": "",
+    "rating": 4.8,
+    "reviews": 310,
+    "phone": "+971 4 222 3344",
+    "whatsapp": "+971 50 999 8877",
+    "email": "",
+    "website": "https://artisanroast.ae",
+    "instagram": "",
+    "facebook": "",
+    "services": [],
+    "branches": 1,
+    "buyingSignals": [],
+    "websiteStatus": "NEEDS_IMPROVEMENT",
+    "status": "NEW",
+    "notes": "Great specialty coffee, active Instagram",
+    "demoUrl": "",
+    "source": "Google Maps",
+    "demoStatus": "NOT_STARTED",
+    "pitch": {
+      "whatsapp": "Hi Artisan Roast Cafe team 👋\n\nI came across Artisan Roast Cafe in Al Quoz — impressive reviews! and had an idea for your digital presence.\n\nI'm a frontend developer and I'd love to share a FREE custom website concept I prepared for Artisan Roast Cafe — showcasing your signature menu, vibe, and making it 1-tap easy for customers to reserve a table or order on WhatsApp.\n\nThere is absolutely no payment or commitment to see it.\nCould you please share this with the owner or practice manager? I'd love to send over the link! ☕✨",
+      "emailSubject": "Free interactive website demo for Artisan Roast Cafe — menu & reservations",
+      "email": "Hi Artisan Roast Cafe team,\n\nI hope this note finds you well.\n\nI came across Artisan Roast Cafe in Al Quoz and was impressed by your reviews and client feedback.\n\nI am a frontend developer specializing in building modern, high-converting web experiences for local businesses. To demonstrate what is possible for Artisan Roast Cafe, I've put together a complimentary, custom interactive website concept showcasing your signature menu, vibe, and making it 1-tap easy for customers to reserve a table or order on WhatsApp.\n\nKey highlights included in the concept:\n• Fast mobile-first experience with zero clutter\n• Prominent 1-click WhatsApp and call conversion channels\n• table reservations & signature menu highlights\n• Optimized Google search visibility structure\n\nThere is no cost, payment, or commitment required to view the concept. I'd simply welcome the opportunity to share the preview link with the owner or manager.\n\nIf this sounds interesting, please reply to this email or reach me on WhatsApp at this number.\n\nWarm regards,\n\nShiva\nFrontend Developer & Web Specialist\nIndependent Web Development Studio",
+      "followUp1": "Hi Artisan Roast Cafe team 👋 Just following up on my note from a few days ago regarding the free custom website concept for Artisan Roast Cafe.\n\nI've put together a live preview showing how Artisan Roast Cafe can capture more direct WhatsApp enquiries and bookings. Completely free with zero commitment to see it.\n\nCould you please let the owner or manager know? Happy to send the link whenever convenient!",
+      "followUp2": "Hi Artisan Roast Cafe team 👋 Final polite follow-up from me!\n\nIf the team is open to seeing the free website demonstration I put together for Artisan Roast Cafe, I'd be delighted to share the link. If the timing isn't right, no problem at all and I wish Artisan Roast Cafe continued success!",
+      "angle": "Angle: Sensory Menu Showcase & Table Reservations. Frame around capturing hungry visitors searching Maps and Instagram, guiding them directly to signature items and instant table booking via WhatsApp.",
+      "suggestedDemoSections": [
+        "Hero with Signature Brews & Atmosphere",
+        "Curated Food & Drink Menu (Categorized)",
+        "Signature Specialties & Roastery Highlights",
+        "Instagram Live Gallery & Aesthetic Showcase",
+        "Customer Reviews & Rating Highlights",
+        "Instant WhatsApp Table Reservation / Pre-order",
+        "Opening Hours, Parking Info & Location Map"
+      ],
+      "engine": "Built-in Free Template Engine",
+      "toneUsed": "friendly",
+      "targetUsed": "receptionist"
+    },
+    "analysis": {
+      "reachable": false,
+      "https": false,
+      "mobileMeta": false,
+      "title": false,
+      "metaDescription": false,
+      "h1": false,
+      "favicon": false,
+      "responsive": false,
+      "phoneCta": false,
+      "whatsappCta": false,
+      "bookingCta": false,
+      "orderCta": false,
+      "contactCta": false,
+      "contactForm": false,
+      "menuOrServices": false,
+      "addressDetected": false,
+      "mapsLink": false,
+      "socialLinks": [],
+      "performanceLatencyMs": 0,
+      "payloadSizeKb": 0,
+      "accessibilitySignals": {
+        "hasLang": false,
+        "imageAltRatio": 0,
+        "hasAria": false
+      },
+      "findings": [
+        "Could not connect to https://artisanroast.ae (fetch failed)."
+      ],
+      "strengths": [],
+      "gaps": [
+        "Website is down, extremely slow, or blocking automated inspection."
+      ],
+      "opportunities": [
+        "Present a reliable, fast modern website hosted on a high-speed CDN.",
+        "Fix downtime issues costing the business daily prospective clients."
+      ],
+      "basicScore": 0,
+      "analyzedAt": "2026-09-30T05:54:47.213Z"
+    },
+    "score": {
+      "websiteNeed": 10,
+      "growthPotential": 4,
+      "onlinePresenceGap": 7,
+      "googlePresence": 10,
+      "revenueImpact": 7,
+      "easeOfContact": 2,
+      "total": 40,
+      "priority": "B",
+      "priorityLabel": "Moderate opportunity",
+      "buyingSignal": "Moderate",
+      "reasons": [
+        {
+          "category": "Website Need",
+          "score": 10,
+          "max": 10,
+          "reason": "Existing website has significant gaps (Score: 0/100) in mobile, CTAs or speed."
+        },
+        {
+          "category": "Business Growth Potential",
+          "score": 4,
+          "max": 10,
+          "reason": "Base viable local business."
+        },
+        {
+          "category": "Online Presence Gap",
+          "score": 7,
+          "max": 10,
+          "reason": "No WhatsApp CTA button for mobile users; No direct appointment or order booking journey; Lacks mobile responsive configuration; Missing Google search meta description."
+        },
+        {
+          "category": "Google Presence",
+          "score": 10,
+          "max": 10,
+          "reason": "4.8★ rating demonstrates solid client satisfaction; 310 Google reviews prove established customer volume."
+        },
+        {
+          "category": "Potential Revenue Impact",
+          "score": 7,
+          "max": 10,
+          "reason": "Steady-volume consumer business; Strong existing demand accelerates conversion."
+        },
+        {
+          "category": "Ease of Contact",
+          "score": 2,
+          "max": 5,
+          "reason": "Direct WhatsApp available."
+        }
+      ]
+    }
+  },
+  {
+    "id": "a4fc5809-0c60-4bcf-8c0e-2249b8f8601d",
+    "createdAt": "2026-09-29T19:25:06.643Z",
+    "updatedAt": "2026-09-30T05:51:02.485Z",
+    "businessName": "Pearl Dental Clinic Dubai",
+    "category": "Dental Clinic",
+    "country": "",
+    "city": "Dubai",
+    "area": "Jumeirah 1",
+    "mapsUrl": "",
+    "rating": 4.9,
+    "reviews": 215,
+    "phone": "+971 4 344 7890",
+    "whatsapp": "+971 50 123 4567",
+    "email": "",
+    "website": "",
+    "instagram": "",
+    "facebook": "",
+    "services": [
+      "Implants",
+      "Veneers",
+      "Invisalign"
+    ],
+    "branches": 1,
+    "buyingSignals": [
+      "Multiple branches",
+      "Active Instagram/social presence"
+    ],
+    "websiteStatus": "NONE",
+    "status": "CONTACTED",
+    "notes": "Sent WhatsApp outreach offering free concept demo.",
+    "score": {
+      "websiteNeed": 10,
+      "growthPotential": 6,
+      "onlinePresenceGap": 6,
+      "googlePresence": 10,
+      "revenueImpact": 10,
+      "easeOfContact": 2,
+      "total": 44,
+      "priority": "A",
+      "priorityLabel": "High opportunity",
+      "buyingSignal": "Strong",
+      "reasons": [
+        {
+          "category": "Website Need",
+          "score": 10,
+          "max": 10,
+          "reason": "No live website detected. Maximum need for an owned digital storefront."
+        },
+        {
+          "category": "Business Growth Potential",
+          "score": 6,
+          "max": 10,
+          "reason": "Base viable local business; Multiple commercial service offerings; 2 verified commercial buying signals."
+        },
+        {
+          "category": "Online Presence Gap",
+          "score": 6,
+          "max": 10,
+          "reason": "Complete absence of website despite active business."
+        },
+        {
+          "category": "Google Presence",
+          "score": 10,
+          "max": 10,
+          "reason": "4.9★ rating demonstrates solid client satisfaction; 215 Google reviews prove established customer volume."
+        },
+        {
+          "category": "Potential Revenue Impact",
+          "score": 10,
+          "max": 10,
+          "reason": "High-ticket client value industry; Strong existing demand accelerates conversion."
+        },
+        {
+          "category": "Ease of Contact",
+          "score": 2,
+          "max": 5,
+          "reason": "Direct WhatsApp available."
+        }
+      ]
+    },
+    "demoUrl": "",
+    "demoStatus": "NOT_STARTED",
+    "contactedAt": "2026-09-30T00:55:00Z",
+    "nextFollowUpAt": "2026-10-03T00:55:00Z",
+    "analysis": {
+      "reachable": false,
+      "https": false,
+      "mobileMeta": false,
+      "title": false,
+      "metaDescription": false,
+      "h1": false,
+      "favicon": false,
+      "responsive": false,
+      "phoneCta": false,
+      "whatsappCta": false,
+      "bookingCta": false,
+      "orderCta": false,
+      "contactCta": false,
+      "contactForm": false,
+      "menuOrServices": false,
+      "addressDetected": false,
+      "mapsLink": false,
+      "socialLinks": [],
+      "performanceLatencyMs": 0,
+      "payloadSizeKb": 0,
+      "accessibilitySignals": {
+        "hasLang": false,
+        "imageAltRatio": 0,
+        "hasAria": false
+      },
+      "findings": [
+        "No website provided for this business."
+      ],
+      "strengths": [],
+      "gaps": [
+        "Business has no live website — losing high-intent Google Maps and local search visitors."
+      ],
+      "opportunities": [
+        "Create a clean, modern high-converting website showcasing treatments/services and direct WhatsApp bookings.",
+        "Capture local search traffic that currently goes to competitors with websites."
+      ],
+      "basicScore": 0,
+      "analyzedAt": "2026-09-30T05:51:02.387Z"
+    }
+  }
+]

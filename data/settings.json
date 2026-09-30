@@ -1,0 +1,13 @@
+{
+  "userName": "Shiva",
+  "userRole": "Frontend Developer & Web Specialist",
+  "agencyName": "Independent Web Development Studio",
+  "portfolioUrl": "",
+  "userEmail": "",
+  "userWhatsApp": "",
+  "defaultCity": "Dubai",
+  "defaultCategory": "Dental Clinic",
+  "defaultTone": "friendly",
+  "ollamaUrl": "http://127.0.0.1:11434",
+  "ollamaModel": "qwen3:8b"
+}
