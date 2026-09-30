@@ -55,7 +55,14 @@ export default function AddLeadModal({
   defaultCategory = "Dental Clinic",
   onToast
 }: AddLeadModalProps) {
-  const [tab, setTab] = useState<"form" | "paste">("form");
+  // Tabs: autoLink (New Link Auto-Fetch tab), paste (text block), form (manual form)
+  const [tab, setTab] = useState<"autoLink" | "form" | "paste">("autoLink");
+
+  // Auto-Fetch Tab State
+  const [quickMapsUrl, setQuickMapsUrl] = useState("");
+  const [autoFetching, setAutoFetching] = useState(false);
+  const [autoFetchedLead, setAutoFetchedLead] = useState<Partial<Lead> | null>(null);
+  const [autoSaving, setAutoSaving] = useState(false);
 
   // Form State
   const [businessName, setBusinessName] = useState("");
@@ -93,6 +100,122 @@ export default function AddLeadModal({
     );
   }
 
+  // Auto-Fetch Handler for Tab 1
+  async function handleAutoFetch() {
+    if (!quickMapsUrl.trim()) {
+      onToast("Please enter a Google Maps URL");
+      return;
+    }
+
+    setAutoFetching(true);
+    setAutoFetchedLead(null);
+    try {
+      const res = await fetch("/api/resolve-maps", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: quickMapsUrl.trim() })
+      });
+      const data = await res.json();
+
+      if (data.extracted) {
+        setAutoFetchedLead(data.extracted);
+        onToast(`Successfully fetched details for ${data.extracted.businessName}!`);
+      } else if (data.title) {
+        setAutoFetchedLead({
+          businessName: data.title,
+          mapsUrl: data.resolvedUrl || quickMapsUrl,
+          city: defaultCity,
+          category: defaultCategory,
+          country: "United Arab Emirates",
+          phone: data.possiblePhones?.[0] || "",
+          whatsapp: data.possiblePhones?.[0] || "",
+          status: "NEW"
+        });
+        onToast(`Extracted business name: ${data.title}`);
+      } else {
+        onToast(data.error || "Could not fetch details. You can fill the form manually.");
+      }
+    } catch {
+      onToast("Connection timed out. Check the URL and try again.");
+    } finally {
+      setAutoFetching(false);
+    }
+  }
+
+  // 1-Click Save & Analyze from Auto-Fetch Tab
+  async function handleSaveAutoFetched(analyzeImmediately: boolean) {
+    if (!autoFetchedLead || !autoFetchedLead.businessName) {
+      onToast("No fetched business data to save");
+      return;
+    }
+
+    setAutoSaving(true);
+    try {
+      const payload: Partial<Lead> = {
+        ...autoFetchedLead,
+        services: Array.isArray(autoFetchedLead.services) ? autoFetchedLead.services : [],
+        buyingSignals: Array.isArray(autoFetchedLead.buyingSignals) ? autoFetchedLead.buyingSignals : [],
+        websiteStatus: autoFetchedLead.website ? "UNKNOWN" : "NONE",
+        status: "NEW"
+      };
+
+      if (analyzeImmediately) {
+        const analyzeRes = await fetch("/api/analyze", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const analyzeData = await analyzeRes.json();
+        payload.analysis = analyzeData.analysis;
+        payload.score = analyzeData.score;
+        if (!payload.website) {
+          payload.websiteStatus = "NONE";
+        } else if (analyzeData.analysis?.basicScore < 60) {
+          payload.websiteStatus = "NEEDS_IMPROVEMENT";
+        } else {
+          payload.websiteStatus = "GOOD";
+        }
+      }
+
+      const saveRes = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const savedLead = await saveRes.json();
+
+      onToast(`Saved and added ${savedLead.businessName} to pipeline!`);
+      onLeadAdded(savedLead);
+      onClose();
+    } catch {
+      onToast("Failed to save lead");
+    } finally {
+      setAutoSaving(false);
+    }
+  }
+
+  // Transfer Auto-Fetched lead into detailed form tab
+  function handleTransferToForm() {
+    if (!autoFetchedLead) return;
+    if (autoFetchedLead.businessName) setBusinessName(autoFetchedLead.businessName);
+    if (autoFetchedLead.category) setCategory(autoFetchedLead.category);
+    if (autoFetchedLead.city) setCity(autoFetchedLead.city);
+    if (autoFetchedLead.area) setArea(autoFetchedLead.area);
+    if (autoFetchedLead.country) setCountry(autoFetchedLead.country);
+    if (autoFetchedLead.mapsUrl) setMapsUrl(autoFetchedLead.mapsUrl);
+    if (autoFetchedLead.rating) setRating(String(autoFetchedLead.rating));
+    if (autoFetchedLead.reviews) setReviews(String(autoFetchedLead.reviews));
+    if (autoFetchedLead.phone) setPhone(autoFetchedLead.phone);
+    if (autoFetchedLead.whatsapp) setWhatsapp(autoFetchedLead.whatsapp);
+    if (autoFetchedLead.email) setEmail(autoFetchedLead.email);
+    if (autoFetchedLead.website) setWebsite(autoFetchedLead.website);
+    if (autoFetchedLead.services) setServices(autoFetchedLead.services.join(", "));
+    if (autoFetchedLead.buyingSignals) setBuyingSignals(autoFetchedLead.buyingSignals);
+
+    setTab("form");
+    onToast("Details copied to form for editing.");
+  }
+
   async function handleResolveMaps() {
     if (!mapsUrl.trim()) {
       onToast("Enter a Google Maps URL first");
@@ -106,14 +229,23 @@ export default function AddLeadModal({
         body: JSON.stringify({ url: mapsUrl })
       });
       const data = await res.json();
-      if (data.title && !businessName) {
+      if (data.extracted) {
+        if (data.extracted.businessName && !businessName) setBusinessName(data.extracted.businessName);
+        if (data.extracted.category && category === defaultCategory) setCategory(data.extracted.category);
+        if (data.extracted.city) setCity(data.extracted.city);
+        if (data.extracted.phone && !phone) setPhone(data.extracted.phone);
+        if (data.extracted.whatsapp && !whatsapp) setWhatsapp(data.extracted.whatsapp);
+        if (data.extracted.website && !website) setWebsite(data.extracted.website);
+        if (data.extracted.rating && !rating) setRating(String(data.extracted.rating));
+        if (data.extracted.reviews && !reviews) setReviews(String(data.extracted.reviews));
+      } else if (data.title && !businessName) {
         setBusinessName(data.title);
+        if (data.possiblePhones?.[0] && !phone) {
+          setPhone(data.possiblePhones[0]);
+          if (!whatsapp) setWhatsapp(data.possiblePhones[0]);
+        }
       }
-      if (data.possiblePhones && data.possiblePhones.length > 0 && !phone) {
-        setPhone(data.possiblePhones[0]);
-        if (!whatsapp) setWhatsapp(data.possiblePhones[0]);
-      }
-      onToast(data.error ? "Checked Maps link (manual review recommended)" : "Resolved Maps info");
+      onToast("Resolved Maps information");
     } catch {
       onToast("Could not resolve link automatically. Fill in details manually.");
     } finally {
@@ -240,10 +372,10 @@ export default function AddLeadModal({
         {/* Modal Tabs */}
         <div className="tabs-nav">
           <button
-            className={`tab-btn ${tab === "form" ? "active" : ""}`}
-            onClick={() => setTab("form")}
+            className={`tab-btn ${tab === "autoLink" ? "active" : ""}`}
+            onClick={() => setTab("autoLink")}
           >
-            📋 Lead Details Form
+            ⚡ Fast Maps Link (Auto-Fetch)
           </button>
           <button
             className={`tab-btn ${tab === "paste" ? "active" : ""}`}
@@ -251,10 +383,145 @@ export default function AddLeadModal({
           >
             📋 Paste from Google Maps
           </button>
+          <button
+            className={`tab-btn ${tab === "form" ? "active" : ""}`}
+            onClick={() => setTab("form")}
+          >
+            📝 Detailed Form
+          </button>
         </div>
 
         {/* Modal Body */}
         <div className="modal-body">
+          {/* TAB 1: AUTO-FETCH FROM GOOGLE MAPS LINK ONLY */}
+          {tab === "autoLink" && (
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              <div
+                style={{
+                  background: "#eef2ff",
+                  border: "1px solid #c7d2fe",
+                  borderRadius: "var(--radius-md)",
+                  padding: 14,
+                  fontSize: 13,
+                  color: "#3730a3",
+                  lineHeight: 1.5
+                }}
+              >
+                <strong>🚀 1-Click Fast Workflow:</strong> Simply paste any Google Maps link below (short URL e.g. <code>https://maps.app.goo.gl/...</code> or full Maps link). The engine automatically resolves the business name, detects the category, coordinates, discovers their website, and extracts contact channels!
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Google Maps URL *</label>
+                <div style={{ display: "flex", gap: 8 }}>
+                  <input
+                    className="form-input"
+                    value={quickMapsUrl}
+                    onChange={e => setQuickMapsUrl(e.target.value)}
+                    placeholder="https://maps.app.goo.gl/... or https://www.google.com/maps/place/..."
+                    autoFocus
+                  />
+                  <button
+                    type="button"
+                    className="btn btn-accent"
+                    onClick={handleAutoFetch}
+                    disabled={autoFetching || !quickMapsUrl.trim()}
+                    style={{ whiteSpace: "nowrap" }}
+                  >
+                    {autoFetching ? "⚡ Fetching All Data…" : "⚡ Fetch Details"}
+                  </button>
+                </div>
+              </div>
+
+              {/* Fetched Data Preview Card */}
+              {autoFetchedLead && (
+                <div
+                  style={{
+                    background: "white",
+                    border: "1px solid #bbf7d0",
+                    borderRadius: "var(--radius-lg)",
+                    padding: 18,
+                    boxShadow: "0 4px 12px rgba(16, 185, 129, 0.08)"
+                  }}
+                >
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <span style={{ fontSize: 18, fontWeight: 800, color: "var(--text-main)" }}>
+                        {autoFetchedLead.businessName}
+                      </span>
+                      <span className="badge badge-priority-A">
+                        {autoFetchedLead.category || "Local Business"}
+                      </span>
+                    </div>
+                    <span style={{ fontSize: 12, color: "#166534", fontWeight: 700 }}>
+                      ✓ Data Extracted
+                    </span>
+                  </div>
+
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 10, fontSize: 13 }}>
+                    <div>
+                      <span style={{ color: "var(--text-muted)" }}>Location:</span>{" "}
+                      <strong>{[autoFetchedLead.area, autoFetchedLead.city, autoFetchedLead.country].filter(Boolean).join(", ") || "Dubai"}</strong>
+                    </div>
+                    <div>
+                      <span style={{ color: "var(--text-muted)" }}>Google Rating:</span>{" "}
+                      <strong>{autoFetchedLead.rating ? `★ ${autoFetchedLead.rating.toFixed(1)} (${autoFetchedLead.reviews ?? 0} reviews)` : "Not rated"}</strong>
+                    </div>
+                    <div>
+                      <span style={{ color: "var(--text-muted)" }}>Discovered Website:</span>{" "}
+                      {autoFetchedLead.website ? (
+                        <a
+                          href={autoFetchedLead.website.startsWith("http") ? autoFetchedLead.website : `https://${autoFetchedLead.website}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          style={{ color: "var(--brand-accent)", textDecoration: "underline", fontWeight: 600 }}
+                        >
+                          {autoFetchedLead.website}
+                        </a>
+                      ) : (
+                        <span style={{ color: "#dc2626", fontWeight: 600 }}>No website found</span>
+                      )}
+                    </div>
+                    <div>
+                      <span style={{ color: "var(--text-muted)" }}>Phone / WhatsApp:</span>{" "}
+                      <strong>{autoFetchedLead.phone || autoFetchedLead.whatsapp || "Not listed"}</strong>
+                    </div>
+                  </div>
+
+                  <div style={{ marginTop: 16, paddingTop: 14, borderTop: "1px solid #f1f5f9", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <button
+                      type="button"
+                      className="btn btn-outline btn-sm"
+                      onClick={handleTransferToForm}
+                    >
+                      ✏️ Review & Edit in Form
+                    </button>
+
+                    <div style={{ display: "flex", gap: 8 }}>
+                      <button
+                        type="button"
+                        className="btn btn-secondary btn-sm"
+                        onClick={() => handleSaveAutoFetched(false)}
+                        disabled={autoSaving}
+                      >
+                        Save Lead Only
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-accent btn-sm"
+                        onClick={() => handleSaveAutoFetched(true)}
+                        disabled={autoSaving}
+                        style={{ fontWeight: 800 }}
+                      >
+                        {autoSaving ? "Saving & Analyzing…" : "🚀 1-Click: Save & Analyze Lead"}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* TAB 2: PASTE RAW TEXT BLOCK FROM GOOGLE MAPS */}
           {tab === "paste" && (
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div style={{ fontSize: 13, color: "var(--text-muted)", lineHeight: 1.5 }}>
@@ -302,13 +569,14 @@ export default function AddLeadModal({
                     <div><strong>City/Area:</strong> {[extractedData.area, extractedData.city].filter(Boolean).join(", ") || "Not found"}</div>
                   </div>
                   <div style={{ marginTop: 10, fontSize: 11, color: "var(--text-muted)" }}>
-                    Switch to the "Lead Details Form" tab to make any corrections before saving.
+                    Switch to the "Detailed Form" tab to make any corrections before saving.
                   </div>
                 </div>
               )}
             </div>
           )}
 
+          {/* TAB 3: DETAILED MANUAL FORM */}
           {tab === "form" && (
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               {/* Row 1: Name & Category */}
@@ -550,26 +818,37 @@ export default function AddLeadModal({
           )}
         </div>
 
-        {/* Modal Footer */}
-        <div className="modal-footer">
-          <button className="btn btn-outline" onClick={onClose} disabled={saving}>
-            Cancel
-          </button>
-          <button
-            className="btn btn-secondary"
-            onClick={() => handleSubmit(false)}
-            disabled={saving || !businessName.trim()}
-          >
-            {saving ? "Saving…" : "Save Lead Only"}
-          </button>
-          <button
-            className="btn btn-accent"
-            onClick={() => handleSubmit(true)}
-            disabled={saving || !businessName.trim()}
-          >
-            {saving ? "Analyzing & Saving…" : "⚡ Analyze & Save Lead"}
-          </button>
-        </div>
+        {/* Modal Footer (for form tab) */}
+        {tab === "form" && (
+          <div className="modal-footer">
+            <button className="btn btn-outline" onClick={onClose} disabled={saving}>
+              Cancel
+            </button>
+            <button
+              className="btn btn-secondary"
+              onClick={() => handleSubmit(false)}
+              disabled={saving || !businessName.trim()}
+            >
+              {saving ? "Saving…" : "Save Lead Only"}
+            </button>
+            <button
+              className="btn btn-accent"
+              onClick={() => handleSubmit(true)}
+              disabled={saving || !businessName.trim()}
+            >
+              {saving ? "Analyzing & Saving…" : "⚡ Analyze & Save Lead"}
+            </button>
+          </div>
+        )}
+
+        {/* Modal Footer for autoLink or paste tab when no preview */}
+        {tab !== "form" && (
+          <div className="modal-footer">
+            <button className="btn btn-outline" onClick={onClose}>
+              Close
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
